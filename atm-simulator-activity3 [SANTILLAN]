@@ -1,0 +1,78 @@
+using System;
+
+class ATM
+{
+    static void Main()
+    {
+        // Display your name and program title
+        Console.WriteLine("ATM Simulator by Roy John Santillan");
+        Console.WriteLine("===================================");
+        
+        double balance = 1000.00; // Initial balance
+        bool exit = false;
+
+        while (!exit)
+        {
+            Console.WriteLine("\nATM Menu:");
+            Console.WriteLine("1: Check Balance");
+            Console.WriteLine("2: Deposit Money");
+            Console.WriteLine("3: Withdraw Money");
+            Console.WriteLine("4: Exit");
+            Console.Write("Choose an option (1-4): ");
+
+            string choice = Console.ReadLine();
+
+            switch (choice)
+            {
+                case "1":
+                    // Check Balance
+                    Console.WriteLine($"Your balance is: ${balance:F2}");
+                    break;
+
+                case "2":
+                    // Deposit Money
+                    Console.Write("Enter deposit amount: $");
+                    double deposit = Convert.ToDouble(Console.ReadLine());
+                    if (deposit > 0)
+                    {
+                        balance += deposit;
+                        Console.WriteLine($"Deposited ${deposit:F2}. Your new balance is ${balance:F2}");
+                    }
+                    else
+                    {
+                        Console.WriteLine("ERROR! Please enter positive deposit amount");
+                    }
+                    break;
+
+                case "3":
+                    // Withdraw Money
+                    Console.Write("Enter withdrawal amount: $");
+                    double withdrawal = Convert.ToDouble(Console.ReadLine());
+                    if (withdrawal <= balance && withdrawal > 0)
+                    {
+                        balance -= withdrawal;
+                        Console.WriteLine($"Withdrew ${withdrawal:F2}. Your new balance is ${balance:F2}");
+                    }
+                    else if (withdrawal > balance)
+                    {
+                        Console.WriteLine("ERROR! Cannot withdraw more than current balance");
+                    }
+                    else
+                    {
+                        Console.WriteLine("ERROR! Enter positive withdrawal amount");
+                    }
+                    break;
+
+                case "4":
+                    // Exit
+                    Console.WriteLine("Terminating ATM");
+                    exit = true;
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid option. Please select a valid menu option.");
+                    break;
+            }
+        }
+    }
+}
